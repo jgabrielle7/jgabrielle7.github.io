@@ -1,2 +1,2 @@
 # jgabrielle7.github.io
-Personal website.
+A personal blog project (with a collection of notes, newsletters, portfolios, etc.)
