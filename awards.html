@@ -29,98 +29,6 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
-  <style>
-    /* Primary color */
-    :root {
-      --color-primary-white: rgb(240, 240, 240);
-    }
-
-    main {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 50px;
-      font-family: 'Roboto', sans-serif;
-    }
-
-    .card {
-      width: 24rem;
-      height: 36rem;
-      border-radius: 10px;
-      overflow: hidden;
-      cursor: pointer;
-      position: relative;
-      color: var(--color-primary-white);
-      box-shadow: 0 10px 30px 5px rgba(0, 0, 0, 0.2);
-    }
-
-    .card img {
-      position: absolute;
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      opacity: 0.9;
-      transition: opacity .2s ease-out;
-    }
-
-    .card-content {
-      position: relative;
-      z-index: 1; /* Brings content above the image */
-      padding: 20px;
-    }
-
-    .card h2 {
-      position: absolute;
-      inset: auto auto 30px 30px;
-      margin: 0;
-      font-family: 'Roboto Condensed', sans-serif;
-      font-weight: normal;
-      text-transform: uppercase;
-      transition: inset .3s .3s ease-out;
-    }
-
-    .card p,
-    .card a {
-      position: absolute;
-      opacity: 0;
-      max-width: 80%;
-      transition: opacity .3s ease-out;
-    }
-
-    .card p {
-      inset: auto auto 80px 30px;
-    }
-
-    .card a {
-      inset: auto auto 40px 30px;
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .card:hover h2 {
-      inset: auto auto 220px 30px;
-      transition: inset .3s ease-out;
-    }
-
-    .card:hover p,
-    .card:hover a {
-      opacity: 1;
-      transition: opacity .5s .1s ease-in;
-    }
-
-    .card:hover img {
-      transition: opacity .3s ease-in;
-      opacity: 1;
-    }
-
-    .material-symbols-outlined {
-      vertical-align: middle;
-    }
-  </style>
-
   <!-- =======================================================
   * Template Name: NiceAdmin
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -269,42 +177,33 @@
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
+
     <div class="pagetitle">
-      <h1>Course Awards</h1>
+      <h1>Blank Page</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="awards.html">Awards</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Pages</li>
+          <li class="breadcrumb-item active">Blank</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
-  
+
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
-          <!-- Existing Content Card -->
+
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Datatables</h5>
-              <p>Add lightweight datatables to your project...</p>
+              <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable. Check for <a href="https://fiduswriter.github.io/simple-datatables/demos/" target="_blank">more examples</a>.</p>
             </div>
           </div>
-          <!-- End Existing Content Card -->
-  
-          <!-- Custom Card Component -->
-          <div class="card">
-            <img src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&ixlib=rb-1.2.1&q=80" alt="">
-            <div class="card-content">
-              <h2>Card Heading</h2>
-              <p>Lorem ipsum dolor sit amet consectetur...</p>
-              <a href="#" class="button">Find out more
-                <span class="material-symbols-outlined">arrow_right_alt</span>
-              </a>
-            </div>
-          </div>
-          <!-- End Custom Card Component -->
+
         </div>
       </div>
     </section>
+
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
