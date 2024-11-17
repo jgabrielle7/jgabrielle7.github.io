@@ -316,4 +316,27 @@
     }, 200);
   }
 
+    /**
+   * Certificate Generator
+   */
+    const form = select('#certificate-form'); // Form for name input
+    const nameInput = select('#name'); // Input field for the name
+    const certificate = select('#certificate'); // Certificate container
+    const certificateName = select('#certificate-name'); // Name placeholder on the certificate
+  
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevent form submission reload
+  
+        const name = nameInput.value.trim(); // Get and trim the input value
+  
+        if (name) {
+          certificateName.textContent = name; // Set the name on the certificate
+          certificate.classList.remove('d-none'); // Show the certificate
+        } else {
+          alert('Please enter your name!'); // Handle empty input case
+        }
+      });
+    }
+  
 })();
