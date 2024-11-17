@@ -376,34 +376,31 @@
   <script src="assets/js/main.js"></script>
 
   <script>
-    $(document).ready(function () {
-        $('#certificate-form').on('submit', function (e) {
-            e.preventDefault();
-            const name = $('#name').val().trim();
-            
-            if (name === "") {
-                alert("Please enter your name!");
-                return;
-            }
-
-            // Update certificate with name and issue date
-            $('#certificate-name').text(name);
-            const today = new Date().toLocaleDateString();
-            $('#issue-date').text(today);
-
-            // Display the certificate
-            $('#certificate').removeClass('d-none');
-
-            // Convert the certificate to an image for download
-            html2canvas(document.querySelector("#certificate")).then(canvas => {
-                const link = document.createElement('a');
-                link.download = 'certificate.png';
-                link.href = canvas.toDataURL();
-                link.click();
-            });
-        });
+    // Wait for the DOM to load
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("certificate-form");
+      const nameInput = document.getElementById("name");
+      const certificate = document.getElementById("certificate");
+      const certificateName = document.getElementById("certificate-name");
+  
+      // Form submission handler
+      form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent form from reloading the page
+  
+        const name = nameInput.value.trim();
+  
+        if (name) {
+          // Update the certificate with the entered name
+          certificateName.textContent = name;
+  
+          // Show the certificate
+          certificate.classList.remove("d-none");
+        } else {
+          alert("Please enter your name.");
+        }
+      });
     });
-  </script>
+  </script>  
 
 </body>
 
