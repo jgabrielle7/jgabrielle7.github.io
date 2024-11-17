@@ -316,4 +316,33 @@
     }, 200);
   }
   
+/** Certificate Generator */
+$(document).ready(function () {
+  $('#certificate-form').on('submit', function (e) {
+      e.preventDefault();
+      const name = $('#name').val().trim();
+      
+      if (name === "") {
+          alert("Please enter your name!");
+          return;
+      }
+
+      // Update certificate with name and issue date
+      $('#certificate-name').text(name);
+      const today = new Date().toLocaleDateString();
+      $('#issue-date').text(today);
+
+      // Display the certificate
+      $('#certificate').removeClass('d-none');
+
+      // Convert the certificate to an image for download
+      html2canvas(document.querySelector("#certificate")).then(canvas => {
+          const link = document.createElement('a');
+          link.download = 'certificate.png';
+          link.href = canvas.toDataURL();
+          link.click();
+      });
+  });
+});
+
 })();
