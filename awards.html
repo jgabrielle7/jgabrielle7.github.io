@@ -37,162 +37,162 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
   <style>
-.selector {
-    text-align: left;
-    margin-bottom: 1em;
-}
-.selector span {
-    background: #365096;
-    padding: 0.5em 0.75em;
-    display: inline-block;
-    text-transform: uppercase;
-    border-radius: 2px;
-    color: #1f253d;
-    text-shadow: 0 0 1px #1f253d;
-    cursor: pointer;
-	min-width: 65px;
-}
-.selector span:before {
-    display: none;
-}
-.selector span:hover {
-	background: #9099b7;
-}
-.selector span.active {
-	background: #9099b7;
-    color: #1f253d!important;
-    filter: invert(0);
-    text-shadow: 0 0 1px #9099b7;
-    font-weight: 400;
-}
-.ranking {
-    max-width: 100%;
-    margin: 0 auto;
-	position: relative;
-}
-.ranking ul {
-    margin: 0;
-    padding: 0;
-	position: relative;
-}
-.ranking ul li {
-    background: #394264;
-    margin: 1em 0 0;
-    padding: 2%;
-    list-style: none;
-    float: left;
-    width: 96%;
-    box-shadow: 0px 2px 6px -3px #030306cf;
-    border-radius: 5px;
-	  position: absolute;
-	  transition: top 0.5s ease 0s;
-}
-.ranking ul li.one { top: 0; }
-.ranking ul li.two { top: 7em; }
-.ranking ul li.three { top: 14em; }
-.ranking ul li.four  { top: 21em; }
-.ranking ul li img {
-    display: inline-block;
-    width: 20%;
-    margin-right: 2%;
-    float: left;
-    box-sizing: border-box;
-    border-radius: 5px;
-	transition: all 0.4s ease 0s;
-}
-.ranking ul li:hover img {
-    width: 26%;
-    transition: all 0.4s ease 0s;
-    margin-left: -6%;
-    margin-top: -3%;
-    margin-bottom: -3%;
-	box-shadow: 3px 3px 5px 0 #1f253d;
-}
-.ranking ul li:hover .starring {
-	color: #9099b7;
-	color: #bbbeca;
-}
-.ranking ul li span {
-    display: inline-block;
-    width: 78%;
-	color: #1d2234;
-	font-size: 0.9em;
-}
-.ranking ul li .starring {
-    font-size: 1.5em;
-	color: #1f253d;
-    font-weight: 400;
-}
-.ranking ul li .film {
-    color: #1f253d;
-    margin-bottom: 6px;
-    font-size: 1em;
-    margin-top: 1px;
-    text-indent: 1px;
-}
-.starring:before, .film:before {
-    display: none;
-}
-.premiere:before {
-	background: url(https://cdn.josetxu.com/img/joker-premiere.png) no-repeat;
-}
-.performance:before {
-	background: url(https://cdn.josetxu.com/img/joker-performance.png) no-repeat;
-}
-.budget:before {
-	background: url(https://cdn.josetxu.com/img/joker-budget.png) no-repeat;
-}
-.box-office:before {
-	background: url(https://cdn.josetxu.com/img/joker-boxoffice.png) no-repeat;
-}
+    .selector {
+        text-align: left;
+        margin-bottom: 1em;
+    }
+    .selector span {
+        background: #365096;
+        padding: 0.5em 0.75em;
+        display: inline-block;
+        text-transform: uppercase;
+        border-radius: 2px;
+        color: #1f253d;
+        text-shadow: 0 0 1px #1f253d;
+        cursor: pointer;
+      min-width: 65px;
+    }
+    .selector span:before {
+        display: none;
+    }
+    .selector span:hover {
+      background: #9099b7;
+    }
+    .selector span.active {
+      background: #9099b7;
+        color: #1f253d!important;
+        filter: invert(0);
+        text-shadow: 0 0 1px #9099b7;
+        font-weight: 400;
+    }
+    .ranking {
+        max-width: 100%;
+        margin: 0 auto;
+      position: relative;
+    }
+    .ranking ul {
+        margin: 0;
+        padding: 0;
+      position: relative;
+    }
+    .ranking ul li {
+        background: #394264;
+        margin: 1em 0 0;
+        padding: 2%;
+        list-style: none;
+        float: left;
+        width: 96%;
+        box-shadow: 0px 2px 6px -3px #030306cf;
+        border-radius: 5px;
+        position: absolute;
+        transition: top 0.5s ease 0s;
+    }
+    .ranking ul li.one { top: 0; }
+    .ranking ul li.two { top: 7em; }
+    .ranking ul li.three { top: 14em; }
+    .ranking ul li.four  { top: 21em; }
+    .ranking ul li img {
+        display: inline-block;
+        width: 20%;
+        margin-right: 2%;
+        float: left;
+        box-sizing: border-box;
+        border-radius: 5px;
+      transition: all 0.4s ease 0s;
+    }
+    .ranking ul li:hover img {
+        width: 26%;
+        transition: all 0.4s ease 0s;
+        margin-left: -6%;
+        margin-top: -3%;
+        margin-bottom: -3%;
+      box-shadow: 3px 3px 5px 0 #1f253d;
+    }
+    .ranking ul li:hover .starring {
+      color: #9099b7;
+      color: #bbbeca;
+    }
+    .ranking ul li span {
+        display: inline-block;
+        width: 78%;
+      color: #1d2234;
+      font-size: 0.9em;
+    }
+    .ranking ul li .starring {
+        font-size: 1.5em;
+      color: #1f253d;
+        font-weight: 400;
+    }
+    .ranking ul li .film {
+        color: #1f253d;
+        margin-bottom: 6px;
+        font-size: 1em;
+        margin-top: 1px;
+        text-indent: 1px;
+    }
+    .starring:before, .film:before {
+        display: none;
+    }
+    .premiere:before {
+      background: url(https://cdn.josetxu.com/img/joker-premiere.png) no-repeat;
+    }
+    .performance:before {
+      background: url(https://cdn.josetxu.com/img/joker-performance.png) no-repeat;
+    }
+    .budget:before {
+      background: url(https://cdn.josetxu.com/img/joker-budget.png) no-repeat;
+    }
+    .box-office:before {
+      background: url(https://cdn.josetxu.com/img/joker-boxoffice.png) no-repeat;
+    }
 
-span:before {
-    height: 20px;
-    float: left;
-    margin-right: 3px;
-    width: 20px;
-    content: "";
-	opacity: 0.475;
-}
-.premiere, .performance {
-    width: 17% !important;
-    line-height: 1.55em;
-}
-.budget, .box-office {
-    width: 20% !important;
-    line-height: 1.55em;
-}
-.premiere:hover, .performance:hover, .budget:hover, .box-office:hover {
-	filter: invert(1);
-	color: #000;
-}
-.premiere:hover:before, .performance:hover:before, .budget:hover:before, .box-office:hover:before {
-	opacity: 0.8;
-}
-.active {
-    filter: invert(1);
-    color: #000 !important;
-}
-.active:before {
-    opacity: 0.8;
-}
+    span:before {
+        height: 20px;
+        float: left;
+        margin-right: 3px;
+        width: 20px;
+        content: "";
+      opacity: 0.475;
+    }
+    .premiere, .performance {
+        width: 17% !important;
+        line-height: 1.55em;
+    }
+    .budget, .box-office {
+        width: 20% !important;
+        line-height: 1.55em;
+    }
+    .premiere:hover, .performance:hover, .budget:hover, .box-office:hover {
+      filter: invert(1);
+      color: #000;
+    }
+    .premiere:hover:before, .performance:hover:before, .budget:hover:before, .box-office:hover:before {
+      opacity: 0.8;
+    }
+    .active {
+        filter: invert(1);
+        color: #000 !important;
+    }
+    .active:before {
+        opacity: 0.8;
+    }
 
 
-@media (max-width:400px) {
-	h1 {
-		font-size: 3.15em;
-		margin-top: 0.15em;
-	}
-	.selector span {
-		min-width: 0;
-	}
-	.ranking {
-		max-width: 99%;
-	}
-	.ranking ul li {
-		margin-top: 2px;
-	}
-}
+    @media (max-width:400px) {
+      h1 {
+        font-size: 3.15em;
+        margin-top: 0.15em;
+      }
+      .selector span {
+        min-width: 0;
+      }
+      .ranking {
+        max-width: 99%;
+      }
+      .ranking ul li {
+        margin-top: 2px;
+      }
+    }
   </style>
 </head>
 
@@ -353,6 +353,7 @@ span:before {
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Leaderboard</h5>
+<<<<<<< HEAD
               <div class="content">
                 <div class="selector">
                   <span id="byPremiere" class="active">Premiere</span> 
@@ -392,6 +393,9 @@ span:before {
                   </ul>
                 </div>
               </div>
+=======
+              <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable. Check for <a href="https://fiduswriter.github.io/simple-datatables/demos/" target="_blank">more examples</a>.</p>
+>>>>>>> parent of cc13696 (added new leaderboard)
             </div>
           </div>
         </div>
@@ -487,61 +491,6 @@ span:before {
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
-  <script>
-    var elem = function (id){ return document.getElementById(id); }
-    var qSel = function (el){ return document.querySelectorAll(el); }
-    var li  = qSel('li');
-    var pre = qSel('.premiere');
-    var per = qSel('.performance');
-    var box = qSel('.box-office');
-    var bud = qSel('.budget');
-
-    elem('byPremiere').addEventListener('click', function() {
-      clean();
-      for(var i=0; i<pre.length; i++){pre[i].classList.add('active');}
-      elem('jack').classList.add('one');
-      elem('heath').classList.add('two');
-      elem('jared').classList.add('three');
-      elem('joaquin').classList.add('four');
-      this.classList.add('active');
-    });
-    elem('byBoxOffice').addEventListener('click', function() {
-      clean();
-      for(var i=0; i<box.length; i++){box[i].classList.add('active');}
-      elem('joaquin').classList.add('one');
-      elem('heath').classList.add('two');
-      elem('jared').classList.add('three');
-      elem('jack').classList.add('four');
-      this.classList.add('active');
-    });
-    elem('byBudget').addEventListener('click', function() {
-      clean();
-      for(var i=0; i<bud.length; i++){bud[i].classList.add('active');}
-      elem('jack').classList.add('one');
-      elem('joaquin').classList.add('two');
-      elem('jared').classList.add('three');
-      elem('heath').classList.add('four');
-      this.classList.add('active');
-    });
-    elem('byPerformance').addEventListener('click', function() {
-      clean();
-      for(var i=0; i<per.length; i++){per[i].classList.add('active');}
-      elem('heath').classList.add('one');
-      elem('jack').classList.add('two');
-      elem('joaquin').classList.add('three');
-      elem('jared').classList.add('four');
-      this.classList.add('active');
-    });
-
-    function clean(){
-      for(var i=0; i<li.length; i++){li[i].className='';}
-      var actives = qSel('.active');
-      for(var i=0; i<actives.length; i++){actives[i].classList.remove('active');}
-    }
-
-    //initial rise
-    setTimeout(function(){ elem('byPerformance').click(); }, 1000);
-  </script>
 </body>
 
 </html>
