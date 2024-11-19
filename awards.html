@@ -38,11 +38,11 @@
   ======================================================== -->
   <style>
 .selector {
-    text-align: center;
-    margin-bottom: 2em;
+    text-align: left;
+    margin-bottom: 1em;
 }
 .selector span {
-    background: #394264;
+    background: #365096;
     padding: 0.5em 0.75em;
     display: inline-block;
     text-transform: uppercase;
@@ -66,7 +66,7 @@
     font-weight: 400;
 }
 .ranking {
-    max-width: 400px;
+    max-width: 100%;
     margin: 0 auto;
 	position: relative;
 }
@@ -84,8 +84,8 @@
     width: 96%;
     box-shadow: 0px 2px 6px -3px #030306cf;
     border-radius: 5px;
-	position: absolute;
-	transition: top 0.5s ease 0s;
+	  position: absolute;
+	  transition: top 0.5s ease 0s;
 }
 .ranking ul li.one { top: 0; }
 .ranking ul li.two { top: 7em; }
@@ -145,6 +145,7 @@
 .box-office:before {
 	background: url(https://cdn.josetxu.com/img/joker-boxoffice.png) no-repeat;
 }
+
 span:before {
     height: 20px;
     float: left;
@@ -349,7 +350,6 @@ span:before {
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
-
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Leaderboard</h5>
@@ -389,21 +389,11 @@ span:before {
                       <span class="budget">$175 M</span>
                       <span class="box-office">$747 M</span>
                     </li>
-                    <li class="four" id="joaquin">
-                      <img src="https://cdn.josetxu.com/img/joker-joaquin.jpg">
-                      <span class="starring">Joaquin Phoenix</span>
-                      <span class="film">Joker</span>
-                      <span class="premiere">2019</span>
-                      <span class="performance">9.2</span>
-                      <span class="budget">$55 M</span>
-                      <span class="box-office">$1074 M</span>
-                    </li>
                   </ul>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
