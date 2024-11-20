@@ -453,17 +453,11 @@
 
         // Add the name text to the PDF
         const nameText = $('#name').val();
+        const xPos = doc.internal.pageSize.width - 150; // Adjust this value to position the text to the right
+        const yPos = 100; // Adjust as needed for vertical placement
+
         doc.setFont("helvetica", "bold");
         doc.setFontSize(30);
-
-        // Calculate text width and adjust x for centering
-        const textWidth = doc.getTextWidth(nameText);
-        const xPos = (doc.internal.pageSize.width - textWidth) / 2;
-
-        // Adjust y position if necessary
-        const yPos = 80;  // Change this to move the text up or down as needed
-
-        // Add the text to the PDF with adjusted position
         doc.text(nameText, xPos, yPos);
 
 
