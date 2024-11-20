@@ -37,6 +37,21 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
   <style>
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .name:hover {
+      cursor: pointer;
+      color: #007bff;
+    }
+
+    .table-hover tbody tr:hover {
+      background-color: #f9f9f9;
+    }
+
   </style>
 </head>
 
@@ -197,11 +212,55 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Leaderboard</h5>
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Rank</th>
+                      <th>Avatar</th>
+                      <th>Name</th>
+                      <th>Score</th>
+                    </tr>
+                  </thead>
+                  <tbody id="leaderboard">
+                    <tr data-id="1">
+                      <td>1</td>
+                      <td><img src="assets/img/avatar1.png" alt="Avatar 1" class="avatar"></td>
+                      <td class="name" title="Player One">Player One</td>
+                      <td>
+                        <button class="btn btn-sm btn-success score-up"><i class="bi bi-arrow-up"></i></button>
+                        <span class="score">100</span>
+                        <button class="btn btn-sm btn-danger score-down"><i class="bi bi-arrow-down"></i></button>
+                      </td>
+                    </tr>
+                    <tr data-id="2">
+                      <td>2</td>
+                      <td><img src="assets/img/avatar2.png" alt="Avatar 2" class="avatar"></td>
+                      <td class="name" title="Player Two">Player Two</td>
+                      <td>
+                        <button class="btn btn-sm btn-success score-up"><i class="bi bi-arrow-up"></i></button>
+                        <span class="score">90</span>
+                        <button class="btn btn-sm btn-danger score-down"><i class="bi bi-arrow-down"></i></button>
+                      </td>
+                    </tr>
+                    <tr data-id="3">
+                      <td>3</td>
+                      <td><img src="assets/img/avatar3.png" alt="Avatar 3" class="avatar"></td>
+                      <td class="name" title="Player Three">Player Three</td>
+                      <td>
+                        <button class="btn btn-sm btn-success score-up"><i class="bi bi-arrow-up"></i></button>
+                        <span class="score">80</span>
+                        <button class="btn btn-sm btn-danger score-down"><i class="bi bi-arrow-down"></i></button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </section>    
 
     <section class="section">
       <div class="row">
@@ -291,6 +350,42 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      function updateLeaderboard() {
+        let rows = $("#leaderboard tr").toArray();
+
+        rows.sort(function (a, b) {
+          let scoreA = parseInt($(a).find(".score").text());
+          let scoreB = parseInt($(b).find(".score").text());
+          return scoreB - scoreA;
+        });
+
+        $("#leaderboard").html(rows);
+        rows.forEach((row, index) => {
+          $(row).find("td:first").text(index + 1);
+        });
+      }
+
+      $(".score-up").click(function () {
+        let scoreElement = $(this).siblings(".score");
+        let newScore = parseInt(scoreElement.text()) + 10;
+        scoreElement.text(newScore);
+        updateLeaderboard();
+      });
+
+      $(".score-down").click(function () {
+        let scoreElement = $(this).siblings(".score");
+        let newScore = Math.max(0, parseInt(scoreElement.text()) - 10);
+        scoreElement.text(newScore);
+        updateLeaderboard();
+      });
+
+      $(".name").tooltip(); // Initialize tooltips for names
+    });
+
+  </script>
 
 </body>
 
