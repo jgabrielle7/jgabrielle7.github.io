@@ -37,9 +37,9 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
   <style>
-    .avatar {
-      width: 40px;
-      height: 40px;
+    .player-photo {
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
     }
 
@@ -219,6 +219,7 @@
                 <thead>
                   <tr>
                     <th>Rank</th>
+                    <th>Photo</th>
                     <th>Name</th>
                     <th>Score</th>
                     <th>Adjust</th>
@@ -226,30 +227,33 @@
                 </thead>
                 <tbody id="leaderboard">
                   <tr>
-                    <td>1</td>
+                    <td class="rank">1</td>
+                    <td><img src="https://via.placeholder.com/50" alt="Alice" class="player-photo"></td>
                     <td>Alice</td>
                     <td class="score">120</td>
                     <td>
-                      <button class="btn btn-success adjust-score" data-adjust="up">⬆️</button>
-                      <button class="btn btn-danger adjust-score" data-adjust="down">⬇️</button>
+                      <button class="btn btn-success adjust-score" data-adjust="up">⬆</button>
+                      <button class="btn btn-danger adjust-score" data-adjust="down">⬇</button>
                     </td>
                   </tr>
                   <tr>
-                    <td>2</td>
+                    <td class="rank">2</td>
+                    <td><img src="https://via.placeholder.com/50" alt="Bob" class="player-photo"></td>
                     <td>Bob</td>
                     <td class="score">95</td>
                     <td>
-                      <button class="btn btn-success adjust-score" data-adjust="up">⬆️</button>
-                      <button class="btn btn-danger adjust-score" data-adjust="down">⬇️</button>
+                      <button class="btn btn-success adjust-score" data-adjust="up">⬆</button>
+                      <button class="btn btn-danger adjust-score" data-adjust="down">⬇</button>
                     </td>
                   </tr>
                   <tr>
-                    <td>3</td>
+                    <td class="rank">3</td>
+                    <td><img src="https://via.placeholder.com/50" alt="Charlie" class="player-photo"></td>
                     <td>Charlie</td>
                     <td class="score">85</td>
                     <td>
-                      <button class="btn btn-success adjust-score" data-adjust="up">⬆️</button>
-                      <button class="btn btn-danger adjust-score" data-adjust="down">⬇️</button>
+                      <button class="btn btn-success adjust-score" data-adjust="up">⬆</button>
+                      <button class="btn btn-danger adjust-score" data-adjust="down">⬇</button>
                     </td>
                   </tr>
                 </tbody>
@@ -258,7 +262,7 @@
           </div>
         </div>
       </div>
-    </section> 
+    </section>
 
     <section class="section">
       <div class="row">
@@ -353,20 +357,42 @@
     // jQuery for adjusting leaderboard scores dynamically
     $(document).ready(function () {
       $(".adjust-score").on("click", function () {
-        // Get the score cell related to this button
-        const scoreCell = $(this).closest("tr").find(".score");
+        const row = $(this).closest("tr");
+        const scoreCell = row.find(".score");
         let currentScore = parseInt(scoreCell.text());
   
-        // Check if the button clicked is for up or down adjustment
+        // Increment or decrement score
         if ($(this).data("adjust") === "up") {
-          currentScore += 5; // Increment score
+          currentScore += 5;
         } else if ($(this).data("adjust") === "down" && currentScore > 0) {
-          currentScore -= 5; // Decrement score (but don't go below zero)
+          currentScore -= 5;
         }
   
-        // Update the score in the leaderboard
+        // Update the score in the cell
         scoreCell.text(currentScore);
+  
+        // Update rankings
+        updateRankings();
       });
+  
+      // Function to update rankings based on scores
+      function updateRankings() {
+        const rows = $("#leaderboard tr");
+  
+        // Convert rows into an array and sort by scores (descending)
+        const sortedRows = rows.toArray().sort((a, b) => {
+          const scoreA = parseInt($(a).find(".score").text());
+          const scoreB = parseInt($(b).find(".score").text());
+          return scoreB - scoreA;
+        });
+  
+        // Update ranks and reinsert rows in sorted order
+        $("#leaderboard").empty();
+        sortedRows.forEach((row, index) => {
+          $(row).find(".rank").text(index + 1); // Update rank
+          $("#leaderboard").append(row); // Reinsert row
+        });
+      }
     });
   </script>
 
