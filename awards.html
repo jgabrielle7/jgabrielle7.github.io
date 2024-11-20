@@ -330,10 +330,10 @@
                     <img id="certificate-image" src="assets\img\certificate-completion.png" alt="Certificate Template" width="100%" height="auto">
                     <div id="name-placeholder" style="position: absolute; top: 49%; left: 69%; font-size: 35px; color: #365096; font-weight: bold;"></div>
                   </div>
+                  <!-- Download button -->
+                  <button id="download-pdf" class="btn btn-success mt-3" style="position: right">Download Certificate (PDF)</button>
                 </div>
               </div>
-              <!-- Download button -->
-              <button id="download-pdf" class="btn btn-success mt-3" style="position: right">Download Certificate (PDF)</button>
             </div>
           </div>
         </div>
@@ -458,6 +458,7 @@
 
         doc.setFont("helvetica", "bold");
         doc.setFontSize(30);
+        doc.setTextColor("#365096"); // Set the color to #365096
         doc.text(nameText, xPos, yPos);
 
 
