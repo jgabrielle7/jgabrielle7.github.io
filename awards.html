@@ -328,12 +328,12 @@
                 <div class="col-md-6">
                   <div id="certificate-preview" class="text-center">
                     <img id="certificate-image" src="assets\img\certificate-completion.png" alt="Certificate Template" width="100%" height="auto">
-                    <div id="name-placeholder" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 40px; color: black; font-weight: bold;"></div>
+                    <div id="name-placeholder" style="position: absolute; top: 49%; left: 69%; font-size: 35px; color: #365096; font-weight: bold;"></div>
                   </div>
                 </div>
               </div>
               <!-- Download button -->
-              <button id="download-pdf" class="btn btn-success mt-3">Download Certificate (PDF)</button>
+              <button id="download-pdf" class="btn btn-success mt-3" style="position: right">Download Certificate (PDF)</button>
             </div>
           </div>
         </div>
@@ -455,7 +455,17 @@
         const nameText = $('#name').val();
         doc.setFont("helvetica", "bold");
         doc.setFontSize(30);
-        doc.text(nameText, 105, 80, { align: "center" });
+
+        // Calculate text width and adjust x for centering
+        const textWidth = doc.getTextWidth(nameText);
+        const xPos = (doc.internal.pageSize.width - textWidth) / 2;
+
+        // Adjust y position if necessary
+        const yPos = 80;  // Change this to move the text up or down as needed
+
+        // Add the text to the PDF with adjusted position
+        doc.text(nameText, xPos, yPos);
+
 
         // Save the PDF
         doc.save('certificate.pdf');
