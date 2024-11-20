@@ -52,6 +52,31 @@
       background-color: #f9f9f9;
     }
 
+    #certificateOutput {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    }
+
+    #certificateTitle {
+        font-size: 2em;
+        font-weight: bold;
+    }
+
+    #recipientName {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    #courseName {
+        font-size: 1.2em;
+    }
+
+    #completionDate {
+        font-size: 1.1em;
+        font-style: italic;
+    }
+
   </style>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -315,7 +340,39 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Certificate</h5>
-              <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable. Check for <a href="https://fiduswriter.github.io/simple-datatables/demos/" target="_blank">more examples</a>.</p>
+              <div class="container">
+                <h1 class="text-center mt-5">Certificate Generator</h1>
+                
+                <div class="row mt-5">
+                    <div class="col-md-6">
+                        <form id="certificateForm">
+                            <div class="form-group">
+                                <label for="nameInput">Recipient Name</label>
+                                <input type="text" class="form-control" id="nameInput" placeholder="Enter name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="courseInput">Course Name</label>
+                                <input type="text" class="form-control" id="courseInput" placeholder="Enter course name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="dateInput">Completion Date</label>
+                                <input type="date" class="form-control" id="dateInput" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Generate Certificate</button>
+                        </form>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div id="certificateOutput" class="border p-4" style="display: none;">
+                            <h3 class="text-center" id="certificateTitle">Certificate of Completion</h3>
+                            <h4 class="text-center" id="recipientName">Recipient Name</h4>
+                            <p class="text-center" id="courseName">has successfully completed the course</p>
+                            <h5 class="text-center" id="completionDate">Date</h5>
+                            <button id="downloadBtn" class="btn btn-success btn-block mt-3" style="display: none;">Download PDF</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </div>
           </div>
 
@@ -349,6 +406,8 @@
   <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
@@ -406,6 +465,49 @@
     });
   });
 
+  </script>
+
+  <script>
+    $(document).ready(function() {
+    $('#certificateForm').on('submit', function(e) {
+        e.preventDefault();  // Prevent form from submitting
+
+        var name = $('#nameInput').val();
+        var course = $('#courseInput').val();
+        var date = $('#dateInput').val();
+
+        // Update the certificate content
+        $('#recipientName').text(name);
+        $('#courseName').text('has successfully completed the course ' + course);
+        $('#completionDate').text('Date: ' + date);
+
+        // Show the generated certificate
+        $('#certificateOutput').show();
+        $('#downloadBtn').show();
+    });
+
+    // Download the certificate as a PDF when the button is clicked
+    $('#downloadBtn').on('click', function() {
+        var { jsPDF } = window.jspdf;
+        var doc = new jsPDF();
+        
+        // Get certificate content
+        var name = $('#recipientName').text();
+        var course = $('#courseName').text();
+        var date = $('#completionDate').text();
+
+        // Add text to PDF
+        doc.setFontSize(20);
+        doc.text('Certificate of Completion', 105, 40, null, null, 'center');
+        doc.setFontSize(16);
+        doc.text(name, 105, 70, null, null, 'center');
+        doc.text(course, 105, 90, null, null, 'center');
+        doc.text(date, 105, 110, null, null, 'center');
+        
+        // Save the PDF
+        doc.save('certificate.pdf');
+    });
+});
   </script>
 
 </body>
