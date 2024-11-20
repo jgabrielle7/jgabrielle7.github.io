@@ -37,64 +37,6 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
   <style>
-    .player-photo {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-    }
-
-    .name:hover {
-      cursor: pointer;
-      color: #007bff;
-    }
-
-    .table-hover tbody tr:hover {
-      background-color: #f9f9f9;
-    }
-
-    #certificateOutput {
-    background-color: #f8f9fa;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 40px;
-    }
-
-    .certificate-title {
-        font-size: 2.5em;
-        font-weight: bold;
-        color: #333;
-        margin-bottom: 20px;
-    }
-
-    .certificate-name {
-        font-size: 1.8em;
-        font-weight: bold;
-        color: #333;
-    }
-
-    .certificate-text {
-        font-size: 1.2em;
-        color: #555;
-    }
-
-    .badges-row {
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-
-    .badges-img {
-        width: 60px;
-        height: 60px;
-        margin: 0 10px;
-        border-radius: 50%;
-    }
-
-    .certificate-date {
-        font-size: 1.2em;
-        font-style: italic;
-        color: #555;
-    }
-
   </style>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -354,53 +296,36 @@
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
-
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Certificate</h5>
-              <div class="container">
-                <h1 class="text-center mt-5">Certificate Generator</h1>
-                
-                <div class="row mt-5">
-                    <div class="col-md-6">
-                        <form id="certificateForm">
-                            <div class="form-group">
-                                <label for="nameInput">Recipient Name</label>
-                                <input type="text" class="form-control" id="nameInput" placeholder="Enter name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="dateInput">Completion Date</label>
-                                <input type="date" class="form-control" id="dateInput" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-block">Generate Certificate</button>
-                        </form>
+              <div class="row">
+                <!-- Form to enter name -->
+                <div class="col-md-6">
+                  <form id="certificate-form">
+                    <div class="mb-3">
+                      <label for="name" class="form-label">Enter your Name</label>
+                      <input type="text" class="form-control" id="name" placeholder="Enter your name">
                     </div>
-                    
-                    <div class="col-md-6">
-                        <div id="certificateOutput" class="border p-4" style="display: none;">
-                            <div class="text-center">
-                                <h3 class="certificate-title" id="certificateTitle">Certificate of Completion</h3>
-                                <h4 class="certificate-name" id="recipientName">Recipient Name</h4>
-                                <p class="certificate-text" id="courseName">has successfully completed the course</p>
-                                <div class="badges-row">
-                                    <img src="badge1.png" alt="badge1" class="badges-img">
-                                    <img src="badge2.png" alt="badge2" class="badges-img">
-                                    <img src="badge3.png" alt="badge3" class="badges-img">
-                                    <img src="badge4.png" alt="badge4" class="badges-img">
-                                </div>
-                                <h5 class="certificate-date" id="completionDate">Date</h5>
-                                <button id="downloadBtn" class="btn btn-success btn-block mt-3" style="display: none;">Download PDF</button>
-                            </div>
-                        </div>
-                    </div>
+                    <button type="submit" class="btn btn-primary">Generate Certificate</button>
+                  </form>
+                </div>
+                <!-- Certificate preview -->
+                <div class="col-md-6">
+                  <div id="certificate-preview" class="text-center">
+                    <img id="certificate-image" src="assets\img\certificate-completion.png" alt="Certificate Template" width="100%" height="auto">
+                    <div id="name-placeholder" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 40px; color: white; font-weight: bold;"></div>
+                  </div>
                 </div>
               </div>
+              <!-- Download button -->
+              <button id="download-pdf" class="btn btn-success mt-3">Download Certificate (PDF)</button>
             </div>
           </div>
-
         </div>
       </div>
     </section>
+    
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -435,104 +360,39 @@
   <script src="assets/js/main.js"></script>
 
   <script>
-    // jQuery for adjusting leaderboard scores dynamically
-    $(document).ready(function () {
-    // Function to adjust scores
-    function adjustScore(button) {
-      const row = $(button).closest("tr");
-      const scoreCell = row.find(".score");
-      let currentScore = parseInt(scoreCell.text());
-
-      // Increment or decrement score
-      if ($(button).data("adjust") === "up") {
-        currentScore += 5;
-      } else if ($(button).data("adjust") === "down" && currentScore > 0) {
-        currentScore -= 5;
-      }
-
-      // Update the score in the cell
-      scoreCell.text(currentScore);
-
-      // Update rankings
-      updateRankings();
-    }
-
-    // Function to update rankings based on scores
-    function updateRankings() {
-      const rows = $("#leaderboard tr");
-
-      // Convert rows into an array and sort by scores (descending)
-      const sortedRows = rows.toArray().sort((a, b) => {
-        const scoreA = parseInt($(a).find(".score").text());
-        const scoreB = parseInt($(b).find(".score").text());
-        return scoreB - scoreA;
-      });
-
-      // Update ranks and reinsert rows in sorted order
-      $("#leaderboard").empty();
-      sortedRows.forEach((row, index) => {
-        $(row).find(".rank").text(index + 1); // Update rank
-        $("#leaderboard").append(row); // Reinsert row
-      });
-
-      // Re-bind event listeners
-      $(".adjust-score").off("click").on("click", function () {
-        adjustScore(this);
-      });
-    }
-
-    // Initial event binding
-    $(".adjust-score").on("click", function () {
-      adjustScore(this);
-    });
-  });
-
-  </script>
-
-  <script>
     $(document).ready(function() {
-    $('#certificateForm').on('submit', function(e) {
-        e.preventDefault();  // Prevent form from submitting
-
-        var name = $('#nameInput').val();
-        var date = $('#dateInput').val();
-
-        // Update the certificate content
-        $('#recipientName').text(name);
-        $('#courseName').text('has successfully completed the course "EDTECH 201: Human-Centered Online Learning through Gamification"');
-        $('#completionDate').text('Date: ' + date);
-
-        // Show the generated certificate
-        $('#certificateOutput').show();
-        $('#downloadBtn').show();
-    });
-
-    // Download the certificate as a PDF when the button is clicked
-    $('#downloadBtn').on('click', function() {
-        var { jsPDF } = window.jspdf;
-        var doc = new jsPDF();
-
-        // Set font and title for the certificate
-        doc.setFontSize(20);
-        doc.text('Certificate of Completion', 105, 40, null, null, 'center');
+      // Generate certificate preview
+      $('#certificate-form').submit(function(e) {
+        e.preventDefault();
+        const name = $('#name').val();
         
-        // Set font for recipient name and course details
-        doc.setFontSize(16);
-        doc.text($('#recipientName').text(), 105, 70, null, null, 'center');
-        doc.text($('#courseName').text(), 105, 90, null, null, 'center');
-        doc.text($('#completionDate').text(), 105, 110, null, null, 'center');
-        
-        // Add circular badges to the PDF (Make sure the paths to badge images are correct)
-        doc.addImage('badge1.png', 'PNG', 15, 120, 30, 30);
-        doc.addImage('badge2.png', 'PNG', 55, 120, 30, 30);
-        doc.addImage('badge3.png', 'PNG', 95, 120, 30, 30);
-        doc.addImage('badge4.png', 'PNG', 135, 120, 30, 30);
-
-        // Save the PDF with a dynamic file name
+        // Update the name in the certificate preview
+        $('#name-placeholder').text(name);
+  
+        // Enable the download button
+        $('#download-pdf').prop('disabled', false);
+      });
+  
+      // Download certificate as PDF
+      $('#download-pdf').click(function() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+  
+        // Add certificate image to the PDF
+        const certificateImage = document.getElementById('certificate-image');
+        doc.addImage(certificateImage, 'PNG', 0, 0, 210, 148.5); // Adjust to fit A4 size
+  
+        // Add the name text to the PDF
+        const nameText = $('#name').val();
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(30);
+        doc.text(nameText, 105, 80, { align: "center" });
+  
+        // Save the PDF
         doc.save('certificate.pdf');
+      });
     });
-});
-  </script>
+  </script>  
 
 </body>
 
