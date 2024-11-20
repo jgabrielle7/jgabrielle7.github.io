@@ -212,55 +212,51 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Leaderboard</h5>
-              <div class="table-responsive">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th>Rank</th>
-                      <th>Avatar</th>
-                      <th>Name</th>
-                      <th>Score</th>
-                    </tr>
-                  </thead>
-                  <tbody id="leaderboard">
-                    <tr data-id="1">
-                      <td>1</td>
-                      <td><img src="assets/img/avatar1.png" alt="Avatar 1" class="avatar"></td>
-                      <td class="name" title="Player One">Player One</td>
-                      <td>
-                        <button class="btn btn-sm btn-success score-up"><i class="bi bi-arrow-up"></i></button>
-                        <span class="score">100</span>
-                        <button class="btn btn-sm btn-danger score-down"><i class="bi bi-arrow-down"></i></button>
-                      </td>
-                    </tr>
-                    <tr data-id="2">
-                      <td>2</td>
-                      <td><img src="assets/img/avatar2.png" alt="Avatar 2" class="avatar"></td>
-                      <td class="name" title="Player Two">Player Two</td>
-                      <td>
-                        <button class="btn btn-sm btn-success score-up"><i class="bi bi-arrow-up"></i></button>
-                        <span class="score">90</span>
-                        <button class="btn btn-sm btn-danger score-down"><i class="bi bi-arrow-down"></i></button>
-                      </td>
-                    </tr>
-                    <tr data-id="3">
-                      <td>3</td>
-                      <td><img src="assets/img/avatar3.png" alt="Avatar 3" class="avatar"></td>
-                      <td class="name" title="Player Three">Player Three</td>
-                      <td>
-                        <button class="btn btn-sm btn-success score-up"><i class="bi bi-arrow-up"></i></button>
-                        <span class="score">80</span>
-                        <button class="btn btn-sm btn-danger score-down"><i class="bi bi-arrow-down"></i></button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              <!-- Leaderboard Table -->
+              <table class="table table-bordered table-striped text-center">
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Score</th>
+                    <th>Adjust</th>
+                  </tr>
+                </thead>
+                <tbody id="leaderboard">
+                  <tr>
+                    <td>1</td>
+                    <td>Alice</td>
+                    <td class="score">120</td>
+                    <td>
+                      <button class="btn btn-success adjust-score" data-adjust="up">⬆️</button>
+                      <button class="btn btn-danger adjust-score" data-adjust="down">⬇️</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Bob</td>
+                    <td class="score">95</td>
+                    <td>
+                      <button class="btn btn-success adjust-score" data-adjust="up">⬆️</button>
+                      <button class="btn btn-danger adjust-score" data-adjust="down">⬇️</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Charlie</td>
+                    <td class="score">85</td>
+                    <td>
+                      <button class="btn btn-success adjust-score" data-adjust="up">⬆️</button>
+                      <button class="btn btn-danger adjust-score" data-adjust="down">⬇️</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
       </div>
-    </section>    
+    </section> 
 
     <section class="section">
       <div class="row">
@@ -352,39 +348,24 @@
   <script src="assets/js/main.js"></script>
 
   <script>
+    // jQuery for adjusting leaderboard scores dynamically
     $(document).ready(function () {
-      function updateLeaderboard() {
-        let rows = $("#leaderboard tr").toArray();
-
-        rows.sort(function (a, b) {
-          let scoreA = parseInt($(a).find(".score").text());
-          let scoreB = parseInt($(b).find(".score").text());
-          return scoreB - scoreA;
-        });
-
-        $("#leaderboard").html(rows);
-        rows.forEach((row, index) => {
-          $(row).find("td:first").text(index + 1);
-        });
-      }
-
-      $(".score-up").click(function () {
-        let scoreElement = $(this).siblings(".score");
-        let newScore = parseInt(scoreElement.text()) + 10;
-        scoreElement.text(newScore);
-        updateLeaderboard();
+      $(".adjust-score").on("click", function () {
+        // Get the score cell related to this button
+        const scoreCell = $(this).closest("tr").find(".score");
+        let currentScore = parseInt(scoreCell.text());
+  
+        // Check if the button clicked is for up or down adjustment
+        if ($(this).data("adjust") === "up") {
+          currentScore += 5; // Increment score
+        } else if ($(this).data("adjust") === "down" && currentScore > 0) {
+          currentScore -= 5; // Decrement score (but don't go below zero)
+        }
+  
+        // Update the score in the leaderboard
+        scoreCell.text(currentScore);
       });
-
-      $(".score-down").click(function () {
-        let scoreElement = $(this).siblings(".score");
-        let newScore = Math.max(0, parseInt(scoreElement.text()) - 10);
-        scoreElement.text(newScore);
-        updateLeaderboard();
-      });
-
-      $(".name").tooltip(); // Initialize tooltips for names
     });
-
   </script>
 
 </body>
