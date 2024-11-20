@@ -356,44 +356,56 @@
   <script>
     // jQuery for adjusting leaderboard scores dynamically
     $(document).ready(function () {
-      $(".adjust-score").on("click", function () {
-        const row = $(this).closest("tr");
-        const scoreCell = row.find(".score");
-        let currentScore = parseInt(scoreCell.text());
-  
-        // Increment or decrement score
-        if ($(this).data("adjust") === "up") {
-          currentScore += 5;
-        } else if ($(this).data("adjust") === "down" && currentScore > 0) {
-          currentScore -= 5;
-        }
-  
-        // Update the score in the cell
-        scoreCell.text(currentScore);
-  
-        // Update rankings
-        updateRankings();
-      });
-  
-      // Function to update rankings based on scores
-      function updateRankings() {
-        const rows = $("#leaderboard tr");
-  
-        // Convert rows into an array and sort by scores (descending)
-        const sortedRows = rows.toArray().sort((a, b) => {
-          const scoreA = parseInt($(a).find(".score").text());
-          const scoreB = parseInt($(b).find(".score").text());
-          return scoreB - scoreA;
-        });
-  
-        // Update ranks and reinsert rows in sorted order
-        $("#leaderboard").empty();
-        sortedRows.forEach((row, index) => {
-          $(row).find(".rank").text(index + 1); // Update rank
-          $("#leaderboard").append(row); // Reinsert row
-        });
+    // Function to adjust scores
+    function adjustScore(button) {
+      const row = $(button).closest("tr");
+      const scoreCell = row.find(".score");
+      let currentScore = parseInt(scoreCell.text());
+
+      // Increment or decrement score
+      if ($(button).data("adjust") === "up") {
+        currentScore += 5;
+      } else if ($(button).data("adjust") === "down" && currentScore > 0) {
+        currentScore -= 5;
       }
+
+      // Update the score in the cell
+      scoreCell.text(currentScore);
+
+      // Update rankings
+      updateRankings();
+    }
+
+    // Function to update rankings based on scores
+    function updateRankings() {
+      const rows = $("#leaderboard tr");
+
+      // Convert rows into an array and sort by scores (descending)
+      const sortedRows = rows.toArray().sort((a, b) => {
+        const scoreA = parseInt($(a).find(".score").text());
+        const scoreB = parseInt($(b).find(".score").text());
+        return scoreB - scoreA;
+      });
+
+      // Update ranks and reinsert rows in sorted order
+      $("#leaderboard").empty();
+      sortedRows.forEach((row, index) => {
+        $(row).find(".rank").text(index + 1); // Update rank
+        $("#leaderboard").append(row); // Reinsert row
+      });
+
+      // Re-bind event listeners
+      $(".adjust-score").off("click").on("click", function () {
+        adjustScore(this);
+      });
+    }
+
+    // Initial event binding
+    $(".adjust-score").on("click", function () {
+      adjustScore(this);
     });
+  });
+
   </script>
 
 </body>
