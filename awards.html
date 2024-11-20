@@ -37,6 +37,20 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
   <style>
+    .player-photo {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+
+    .name:hover {
+      cursor: pointer;
+      color: #007bff;
+    }
+
+    .table-hover tbody tr:hover {
+      background-color: #f9f9f9;
+    }
   </style>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -313,7 +327,7 @@
                 <!-- Certificate preview -->
                 <div class="col-md-6">
                   <div id="certificate-preview" class="text-center">
-                    <img id="certificate-image" src="assets\img\certificate-completion.png" alt="Certificate Template" width="100%" height="auto">
+                    <img id="certificate-image" src="path/to/your/certificate-template.png" alt="Certificate Template" width="100%" height="auto">
                     <div id="name-placeholder" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 40px; color: white; font-weight: bold;"></div>
                   </div>
                 </div>
@@ -360,6 +374,61 @@
   <script src="assets/js/main.js"></script>
 
   <script>
+    // jQuery for adjusting leaderboard scores dynamically
+    $(document).ready(function () {
+    // Function to adjust scores
+    function adjustScore(button) {
+      const row = $(button).closest("tr");
+      const scoreCell = row.find(".score");
+      let currentScore = parseInt(scoreCell.text());
+
+      // Increment or decrement score
+      if ($(button).data("adjust") === "up") {
+        currentScore += 5;
+      } else if ($(button).data("adjust") === "down" && currentScore > 0) {
+        currentScore -= 5;
+      }
+
+      // Update the score in the cell
+      scoreCell.text(currentScore);
+
+      // Update rankings
+      updateRankings();
+    }
+
+    // Function to update rankings based on scores
+    function updateRankings() {
+      const rows = $("#leaderboard tr");
+
+      // Convert rows into an array and sort by scores (descending)
+      const sortedRows = rows.toArray().sort((a, b) => {
+        const scoreA = parseInt($(a).find(".score").text());
+        const scoreB = parseInt($(b).find(".score").text());
+        return scoreB - scoreA;
+      });
+
+      // Update ranks and reinsert rows in sorted order
+      $("#leaderboard").empty();
+      sortedRows.forEach((row, index) => {
+        $(row).find(".rank").text(index + 1); // Update rank
+        $("#leaderboard").append(row); // Reinsert row
+      });
+
+      // Re-bind event listeners
+      $(".adjust-score").off("click").on("click", function () {
+        adjustScore(this);
+      });
+    }
+
+    // Initial event binding
+    $(".adjust-score").on("click", function () {
+      adjustScore(this);
+    });
+  });
+
+  </script>
+
+  <script>
     $(document).ready(function() {
       // Generate certificate preview
       $('#certificate-form').submit(function(e) {
@@ -368,31 +437,32 @@
         
         // Update the name in the certificate preview
         $('#name-placeholder').text(name);
-  
+
         // Enable the download button
         $('#download-pdf').prop('disabled', false);
       });
-  
+
       // Download certificate as PDF
       $('#download-pdf').click(function() {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
-  
+
         // Add certificate image to the PDF
         const certificateImage = document.getElementById('certificate-image');
         doc.addImage(certificateImage, 'PNG', 0, 0, 210, 148.5); // Adjust to fit A4 size
-  
+
         // Add the name text to the PDF
         const nameText = $('#name').val();
         doc.setFont("helvetica", "bold");
         doc.setFontSize(30);
         doc.text(nameText, 105, 80, { align: "center" });
-  
+
         // Save the PDF
         doc.save('certificate.pdf');
       });
     });
-  </script>  
+  </script>
+
 
 </body>
 
