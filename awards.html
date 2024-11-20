@@ -511,27 +511,24 @@
     $('#downloadBtn').on('click', function() {
         var { jsPDF } = window.jspdf;
         var doc = new jsPDF();
-        
-        // Get certificate content
-        var name = $('#recipientName').text();
-        var course = $('#courseName').text();
-        var date = $('#completionDate').text();
 
-        // Add text to PDF
+        // Set font and title for the certificate
         doc.setFontSize(20);
         doc.text('Certificate of Completion', 105, 40, null, null, 'center');
-        doc.setFontSize(16);
-        doc.text(name, 105, 70, null, null, 'center');
-        doc.text(course, 105, 90, null, null, 'center');
-        doc.text(date, 105, 110, null, null, 'center');
         
-        // Add badges to PDF
+        // Set font for recipient name and course details
+        doc.setFontSize(16);
+        doc.text($('#recipientName').text(), 105, 70, null, null, 'center');
+        doc.text($('#courseName').text(), 105, 90, null, null, 'center');
+        doc.text($('#completionDate').text(), 105, 110, null, null, 'center');
+        
+        // Add circular badges to the PDF (Make sure the paths to badge images are correct)
         doc.addImage('badge1.png', 'PNG', 15, 120, 30, 30);
         doc.addImage('badge2.png', 'PNG', 55, 120, 30, 30);
         doc.addImage('badge3.png', 'PNG', 95, 120, 30, 30);
         doc.addImage('badge4.png', 'PNG', 135, 120, 30, 30);
-        
-        // Save the PDF
+
+        // Save the PDF with a dynamic file name
         doc.save('certificate.pdf');
     });
 });
