@@ -56,25 +56,43 @@
     background-color: #f8f9fa;
     border: 1px solid #ddd;
     border-radius: 8px;
+    padding: 40px;
     }
 
-    #certificateTitle {
-        font-size: 2em;
+    .certificate-title {
+        font-size: 2.5em;
         font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
     }
 
-    #recipientName {
-        font-size: 1.5em;
+    .certificate-name {
+        font-size: 1.8em;
         font-weight: bold;
+        color: #333;
     }
 
-    #courseName {
+    .certificate-text {
         font-size: 1.2em;
+        color: #555;
     }
 
-    #completionDate {
-        font-size: 1.1em;
+    .badge-row {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .badge-img {
+        width: 60px;
+        height: 60px;
+        margin: 0 10px;
+        border-radius: 50%;
+    }
+
+    .certificate-date {
+        font-size: 1.2em;
         font-style: italic;
+        color: #555;
     }
 
   </style>
@@ -351,10 +369,6 @@
                                 <input type="text" class="form-control" id="nameInput" placeholder="Enter name" required>
                             </div>
                             <div class="form-group">
-                                <label for="courseInput">Course Name</label>
-                                <input type="text" class="form-control" id="courseInput" placeholder="Enter course name" required>
-                            </div>
-                            <div class="form-group">
                                 <label for="dateInput">Completion Date</label>
                                 <input type="date" class="form-control" id="dateInput" required>
                             </div>
@@ -364,15 +378,23 @@
                     
                     <div class="col-md-6">
                         <div id="certificateOutput" class="border p-4" style="display: none;">
-                            <h3 class="text-center" id="certificateTitle">Certificate of Completion</h3>
-                            <h4 class="text-center" id="recipientName">Recipient Name</h4>
-                            <p class="text-center" id="courseName">has successfully completed the course</p>
-                            <h5 class="text-center" id="completionDate">Date</h5>
-                            <button id="downloadBtn" class="btn btn-success btn-block mt-3" style="display: none;">Download PDF</button>
+                            <div class="text-center">
+                                <h3 class="certificate-title" id="certificateTitle">Certificate of Completion</h3>
+                                <h4 class="certificate-name" id="recipientName">Recipient Name</h4>
+                                <p class="certificate-text" id="courseName">has successfully completed the course</p>
+                                <div class="badge-row">
+                                    <img src="badge1.png" alt="badge1" class="badge-img">
+                                    <img src="badge2.png" alt="badge2" class="badge-img">
+                                    <img src="badge3.png" alt="badge3" class="badge-img">
+                                    <img src="badge4.png" alt="badge4" class="badge-img">
+                                </div>
+                                <h5 class="certificate-date" id="completionDate">Date</h5>
+                                <button id="downloadBtn" class="btn btn-success btn-block mt-3" style="display: none;">Download PDF</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+              </div>
             </div>
           </div>
 
@@ -473,12 +495,11 @@
         e.preventDefault();  // Prevent form from submitting
 
         var name = $('#nameInput').val();
-        var course = $('#courseInput').val();
         var date = $('#dateInput').val();
 
         // Update the certificate content
         $('#recipientName').text(name);
-        $('#courseName').text('has successfully completed the course ' + course);
+        $('#courseName').text('has successfully completed the course "EDTECH 201: Human-Centered Online Learning through Gamification"');
         $('#completionDate').text('Date: ' + date);
 
         // Show the generated certificate
@@ -503,6 +524,12 @@
         doc.text(name, 105, 70, null, null, 'center');
         doc.text(course, 105, 90, null, null, 'center');
         doc.text(date, 105, 110, null, null, 'center');
+        
+        // Add badges to PDF
+        doc.addImage('badge1.png', 'PNG', 15, 120, 30, 30);
+        doc.addImage('badge2.png', 'PNG', 55, 120, 30, 30);
+        doc.addImage('badge3.png', 'PNG', 95, 120, 30, 30);
+        doc.addImage('badge4.png', 'PNG', 135, 120, 30, 30);
         
         // Save the PDF
         doc.save('certificate.pdf');
