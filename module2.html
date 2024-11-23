@@ -29,53 +29,6 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
-  <style>
-    /* General Badge Styles */
-    #badge1 {
-      opacity: 0.3;
-      transition: transform 0.7s ease, box-shadow 0.7s ease;
-    }
-
-    #badge1.zoom-effect {
-      opacity: 1;
-      transform: scale(1.5);
-      box-shadow: 0 0 25px 10px rgba(0, 0, 255, 0.4);
-    }
-
-    /* Confetti Firework Effect */
-    #confetti1 {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 0;
-      height: 0;
-      pointer-events: none;
-      z-index: 1000;
-      display: none;
-      position: absolute;
-    }
-
-    .confetti-piece1 {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      background-color: red;
-      border-radius: 50%;
-      animation: rain 2s linear infinite;
-    }
-
-    @keyframes rain {
-      0% {
-        transform: translateX(0);
-        opacity: 1;
-      }
-      100% {
-        transform: translateX(var(--x)) translateY(100vh);
-        opacity: 0;
-      }
-    }
-  </style>
-
   <!-- =======================================================
   * Template Name: NiceAdmin
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -243,39 +196,9 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Progress Checklist</h5>
-              <div class="row d-flex align-items-center">
-                <!-- Checklist Container -->
-                <div class="col-md-8">
-                  <div id="checklist-container">
-                    <ul id="checklist" class="list-group">
-                      <li class="list-group-item">
-                        <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Complete Lesson 1
-                      </li>
-                      <li class="list-group-item">
-                        <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Complete Lesson 2
-                      </li>
-                      <li class="list-group-item">
-                        <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Participate in Discussion
-                      </li>
-                      <li class="list-group-item">
-                        <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Submit Assignment
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-        
-                <!-- Badge Container -->
-                <div class="col-md-4">
-                  <div id="badge-container" class="text-center me-3">
-                    <img id="badge1" src="https://via.placeholder.com/150" alt="Badge" class="rounded-circle border shadow" width="150" height="150"/>
-                  </div>
-                </div>
-              </div>
+              <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable. Check for <a href="https://fiduswriter.github.io/simple-datatables/demos/" target="_blank">more examples</a>.</p>
             </div>
           </div>
-        
-          <!-- Confetti Container -->
-          <div id="confetti1"></div>
 
         </div>
       </div>
@@ -311,63 +234,6 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-
-  <script>
-    $(document).ready(function () {
-      const $checkboxes = $('#checklist input[type="checkbox"]');
-      const $badge = $('#badge1');
-      const $confettiContainer = $('#confetti1');
-
-      // Monitor checklist completion
-      $checkboxes.on('change', function () {
-        if ($checkboxes.filter(':checked').length === $checkboxes.length) {
-          showBadgeEffect();
-          startFireworkConfetti();
-        }
-      });
-
-      function showBadgeEffect() {
-        $badge.addClass('zoom-effect'); // Trigger zoom and focus effect
-      }
-
-      function startFireworkConfetti() {
-        $confettiContainer.show();
-
-        for (let i = 0; i < 200; i++) { // Increased number of confetti pieces
-          const $confetti = $('<div>').addClass('confetti-piece1');
-
-          // Random x-coordinate for horizontal drift and y-coordinate for vertical fall
-          const x = Math.random() * 200 - 100; // Random horizontal offset
-          const y = Math.random() * window.innerHeight; // Vertical position
-
-          // Apply random horizontal position and pass it as CSS variable for the animation
-          $confetti.css({
-            left: `${Math.random() * window.innerWidth}px`,
-            top: `${y}px`,
-            '--x': `${x}px`, // Use CSS custom property for random x-offset
-            backgroundColor: randomColor(),
-          });
-
-          $('body').append($confetti); // Append directly to the body
-
-          // Remove confetti after animation
-          $confetti.on('animationend', function () {
-            $(this).remove();
-          });
-        }
-
-        // Hide container after animation
-        setTimeout(() => {
-          $confettiContainer.hide();
-        }, 15000); // Duration of the confetti display
-      }
-
-      function randomColor() {
-        const colors = ['#ff0', '#0f0', '#00f', '#f00', '#0ff', '#f0f'];
-        return colors[Math.floor(Math.random() * colors.length)];
-      }
-    });
-  </script>
 
 </body>
 
