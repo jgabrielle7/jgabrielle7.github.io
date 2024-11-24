@@ -302,6 +302,36 @@
     });
   })
 
+  document.addEventListener("DOMContentLoaded", () => {
+    const checkItems = document.querySelectorAll(".check-item");
+    const badge = document.getElementById("completion-badge");
+    const badgeImage = document.getElementById("badge-image");
+
+    function checkCompletion() {
+      const allChecked = Array.from(checkItems).every(item => item.checked);
+      if (allChecked) {
+        badge.classList.add("badge-unlocked");
+        badgeImage.style.opacity = 1;
+        triggerConfetti();
+      } else {
+        badge.classList.remove("badge-unlocked");
+        badgeImage.style.opacity = 0.3;
+      }
+    }
+
+    function triggerConfetti() {
+      confetti({
+        particleCount: 100,
+        spread: 160,
+        origin: { x: 0.5, y: 0.5 }
+      });
+    }
+
+    checkItems.forEach(item =>
+      item.addEventListener("change", checkCompletion)
+    );
+  });
+
   /**
    * Autoresize echart charts
    */
