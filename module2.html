@@ -34,14 +34,18 @@
     .checklist ul {
       list-style: none;
       padding: 0;
+      margin:0;
     }
     .checklist li {
-      margin: 10px 96px 0 0;
+      margin: 10px 0; /* Adjusted to create consistent spacing between list items */
       display: flex;
       align-items: center;
+      justify-content: flex-start; /* Ensures the checklist items align to the left */
+      flex-wrap: wrap; /* Allows long text to wrap instead of pushing the layout */
     }
     .checklist input {
       margin-right: 10px;
+      flex-shrink: 0; /* Prevents checkbox from shrinking */
     }
 
     /* Badge styles */
@@ -71,6 +75,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      margin-left: 20px; /* Adds spacing between checklist and badge */
+      flex-shrink: 0; /* Prevents the badge container from shrinking */
     }
   </style>
 
