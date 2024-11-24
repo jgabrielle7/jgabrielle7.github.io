@@ -37,53 +37,55 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 
-  <style>
-    /* General Badge Styles */
-    #badge1 {
+  <styLe>
+    /* Checklist styling */
+    .checklist ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .checklist li {
+      margin: 10px 0; /* Adjusted to create consistent spacing between list items */
+      display: flex;
+      align-items: center;
+      justify-content: flex-start; /* Ensures the checklist items align to the left */
+    }
+
+    .checklist input {
+      margin-right: 10px;
+    }
+
+    /* Badge styles */
+    /* Badge Faint Image */
+    .badge-faint-image {
+      width: 150px; /* Adjust size as needed */
+      height: auto;
       opacity: 0.3;
-      transition: transform 0.7s ease, box-shadow 0.7s ease;
+      transition: opacity 0.5s ease;
     }
 
-    #badge1.zoom-effect {
-      opacity: 1;
-      transform: scale(1.5);
-      box-shadow: 0 0 25px 10px rgba(0, 0, 255, 0.4);
+    /* Badge Button */
+    .badge-faint {
+      opacity: 0.3;
+      transition: opacity 0.5s ease, background-color 0.5s ease;
     }
 
-    /* Confetti Firework Effect */
-    #confetti1 {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 0;
-      height: 0;
-      pointer-events: none;
-      z-index: 1000;
-      display: none;
-      position: absolute;
+    .badge-unlocked {
+      opacity: 1 !important;
+      background-color: #365096 !important;
+      color: white;
     }
 
-    /* Confetti Firework Effect */
-    .confetti-piece1 {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      background-color: red;
-      border-radius: 50%;
-      animation: rain 2s linear infinite; /* Rain effect with a linear motion */
+    /* Positioning adjustments */
+    .badge-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px; /* Adds spacing between checklist and badge */
     }
-    
-    @keyframes rain {
-      0% {
-        transform: translateX(0);
-        opacity: 1;
-      }
-      100% {
-        transform: translateX(var(--x)) translateY(100vh); /* Confetti falls straight down */
-        opacity: 0;
-      }
-    }
-  </style>
+  </styLe>
 </head>
 
 <body>
@@ -663,41 +665,45 @@
           <!-- Progress and Checklist -->
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Progress Checklist</h5>
-              <div class="row d-flex align-items-center" >
-                  <!-- Badge Container -->
-                  <div class="col-md-4">
-                    <div id="badge-container" class="text-center me-5">
-                      <img id="badge1" src="https://via.placeholder.com/100" alt="Badge" class="rounded-circle border shadow" width="100" height="100" />
-                    </div>
+              <div class="row">
+                <div class="col-md-8"> <!-- Checklist section takes up 8 columns on medium screens -->
+                  <div class="checklist">
+                    <h5 class="card-title">Track Your Progress</h5>
+                    <ul id="checklist-items">
+                      <li>
+                        <input type="checkbox" class="check-item" id="item1">
+                        <label for="item1">I understand the meaning and benefits of human-centric design.</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" class="check-item" id="item2">
+                        <label for="item2">I understand the current limitations of online learning courses.</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" class="check-item" id="item3">
+                        <label for="item3">I can identify the difference between traditional online course design and human-centric design.</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" class="check-item" id="item4">
+                        <label for="item4">I can identify the conditions that lead to students taking online courses and barriers to implementing human-centric design.</label>
+                      </li>
+                    </ul>
                   </div>
-                
-                  <!-- Checklist Container -->
-                  <div class="col-md-8">
-                    <div id="checklist-container">
-                      <ul id="checklist" class="list-group">
-                        <li class="list-group-item">
-                          <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Complete Lesson 1
-                        </li>
-                        <li class="list-group-item">
-                          <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Complete Lesson 2
-                        </li>
-                        <li class="list-group-item">
-                          <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Participate in Discussion
-                        </li>
-                        <li class="list-group-item">
-                          <input class="form-check-input me-1" type="checkbox" value="" aria-label="...">Submit Assignment
-                        </li>
-                      </ul>
-                    </div>
+                </div>
+            
+                <div class="col-md-4"> <!-- Badge section takes up 4 columns on medium screens -->
+                  <div class="badge-container ms-4 text-center">
+                    <!-- Faint Circle Badge -->
+                    <img id="badge-image" src="assets\img\module1.png" alt="Module 1 Badge Image" class="badge-faint-image">
+            
+                    <!-- Badge Button -->
+                    <a href="awards.html" id="completion-badge" class="btn btn-secondary mt-3 badge-faint">
+                      Badge Unlocked!
+                    </a>
                   </div>
+                </div>
               </div>
             </div>
           </div>
-          
-            
-            <!-- Confetti Container -->
-            <div id="confetti1"></div>
 
           <!--Reflection-->
           <div class="card">
@@ -749,59 +755,34 @@
   <script src="assets/js/main.js"></script>
 
   <script>
-    $(document).ready(function () {
-      const $checkboxes = $('#checklist input[type="checkbox"]');
-      const $badge = $('#badge1');
-      const $confettiContainer = $('#confetti1');
-  
-      // Monitor checklist completion
-      $checkboxes.on('change', function () {
-        if ($checkboxes.filter(':checked').length === $checkboxes.length) {
-          showBadgeEffect();
-          startFireworkConfetti();
+    document.addEventListener("DOMContentLoaded", () => {
+      const checkItems = document.querySelectorAll(".check-item");
+      const badge = document.getElementById("completion-badge");
+      const badgeImage = document.getElementById("badge-image");
+
+      function checkCompletion() {
+        const allChecked = Array.from(checkItems).every(item => item.checked);
+        if (allChecked) {
+          badge.classList.add("badge-unlocked");
+          badgeImage.style.opacity = 1;
+          triggerConfetti();
+        } else {
+          badge.classList.remove("badge-unlocked");
+          badgeImage.style.opacity = 0.3;
         }
-      });
-  
-      function showBadgeEffect() {
-        $badge.addClass('zoom-effect'); // Trigger zoom and focus effect
       }
-  
-      function startFireworkConfetti() {
-    $confettiContainer.show();
-  
-    for (let i = 0; i < 200; i++) { // Increased number of confetti pieces
-      const $confetti = $('<div>').addClass('confetti-piece1');
-  
-      // Random x-coordinate for horizontal drift and y-coordinate for vertical fall
-      const x = Math.random() * 200 - 100; // Random horizontal offset
-      const y = Math.random() * window.innerHeight; // Vertical position
-      
-      // Apply random horizontal position and pass it as CSS variable for the animation
-      $confetti.css({
-        left: `${Math.random() * window.innerWidth}px`,
-        top: `${y}px`,
-        '--x': `${x}px`, // Use CSS custom property for random x-offset
-        backgroundColor: randomColor(),
-      });
-  
-      $('body').append($confetti); // Append directly to the body
-  
-      // Remove confetti after animation
-      $confetti.on('animationend', function () {
-        $(this).remove();
-      });
-    }
-  
-    // Hide container after animation
-    setTimeout(() => {
-      $confettiContainer.hide();
-    }, 15000); // Duration of the confetti display
-  }
-  
-      function randomColor() {
-        const colors = ['#ff0', '#0f0', '#00f', '#f00', '#0ff', '#f0f'];
-        return colors[Math.floor(Math.random() * colors.length)];
+
+      function triggerConfetti() {
+        confetti({
+          particleCount: 100,
+          spread: 160,
+          origin: { x: 0.5, y: 0.5 }
+        });
       }
+
+      checkItems.forEach(item =>
+        item.addEventListener("change", checkCompletion)
+      );
     });
   </script>
 
