@@ -45,25 +45,32 @@
     }
 
     /* Badge styles */
-    .badge-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    /* Badge Faint Image */
+    .badge-faint-image {
+      width: 150px; /* Adjust size as needed */
+      height: auto;
+      opacity: 0.3;
+      transition: opacity 0.5s ease;
     }
+
+    /* Badge Button */
     .badge-faint {
       opacity: 0.3;
-      font-size: 1.5em;
-      padding: 10px 20px;
-      border: 2px solid #6c757d;
-      background-color: #e9ecef;
-      color: #6c757d;
-      border-radius: 10px;
       transition: opacity 0.5s ease, background-color 0.5s ease;
     }
+
     .badge-unlocked {
-      opacity: 1;
-      background-color: #28a745;
+      opacity: 1 !important;
+      background-color: #28a745 !important;
       color: white;
+    }
+
+    /* Positioning adjustments */
+    .badge-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
   </style>
 
@@ -227,41 +234,46 @@
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
-
-          <div class="card">
-            <div class="card-body d-flex justify-content-between">
-              <div class="checklist">
-                <h5 class="card-title">Progress Checklist</h5>
-                <ul id="checklist-items">
-                  <li>
-                    <input type="checkbox" class="check-item" id="item1">
-                    <label for="item1">Task 1: Complete Module 1</label>
-                  </li>
-                  <li>
-                    <input type="checkbox" class="check-item" id="item2">
-                    <label for="item2">Task 2: Submit Assignment 1</label>
-                  </li>
-                  <li>
-                    <input type="checkbox" class="check-item" id="item3">
-                    <label for="item3">Task 3: Review Module 2</label>
-                  </li>
-                </ul>
-              </div>
-              <div class="badge-container">
-                <div id="completion-badge" class="badge badge-secondary badge-faint">
-                  Badge Unlocked!
-                </div>
-              </div>
-            </div>
+    <!-- Progress Checklist Section -->
+<section class="section">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body d-flex">
+          <!-- Checklist Section -->
+          <div class="checklist">
+            <h5 class="card-title">Progress Checklist</h5>
+            <ul id="checklist-items">
+              <li>
+                <input type="checkbox" class="check-item" id="item1">
+                <label for="item1">Task 1: Complete Module 1</label>
+              </li>
+              <li>
+                <input type="checkbox" class="check-item" id="item2">
+                <label for="item2">Task 2: Submit Assignment 1</label>
+              </li>
+              <li>
+                <input type="checkbox" class="check-item" id="item3">
+                <label for="item3">Task 3: Review Module 2</label>
+              </li>
+            </ul>
           </div>
-          
 
+          <!-- Badge Section -->
+          <div class="badge-container ms-4 text-center">
+            <!-- Faint Circle Badge -->
+            <img id="badge-image" src="assets/img/badge-circle.png" alt="Badge Image" class="badge-faint-image">
+
+            <!-- Badge Button -->
+            <a href="awards.html" id="completion-badge" class="btn btn-secondary mt-3 badge-faint">
+              Badge Unlocked!
+            </a>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
   </main><!-- End #main -->
 
@@ -295,34 +307,37 @@
   <script src="assets/js/main.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const checkItems = document.querySelectorAll(".check-item");
-    const badge = document.getElementById("completion-badge");
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const checkItems = document.querySelectorAll(".check-item");
+      const badge = document.getElementById("completion-badge");
+      const badgeImage = document.getElementById("badge-image");
 
-    function checkCompletion() {
-      const allChecked = Array.from(checkItems).every(item => item.checked);
-      if (allChecked) {
-        badge.classList.add("badge-unlocked");
-        triggerConfetti();
-      } else {
-        badge.classList.remove("badge-unlocked");
+      function checkCompletion() {
+        const allChecked = Array.from(checkItems).every(item => item.checked);
+        if (allChecked) {
+          badge.classList.add("badge-unlocked");
+          badgeImage.style.opacity = 1;
+          triggerConfetti();
+        } else {
+          badge.classList.remove("badge-unlocked");
+          badgeImage.style.opacity = 0.3;
+        }
       }
-    }
 
-    function triggerConfetti() {
-      confetti({
-        particleCount: 100,
-        spread: 160,
-        origin: { x: 0.5, y: 0.5 }
-      });
-    }
+      function triggerConfetti() {
+        confetti({
+          particleCount: 100,
+          spread: 160,
+          origin: { x: 0.5, y: 0.5 }
+        });
+      }
 
-    checkItems.forEach(item =>
-      item.addEventListener("change", checkCompletion)
-    );
-  });
-</script>
+      checkItems.forEach(item =>
+        item.addEventListener("change", checkCompletion)
+      );
+    });
+  </script>
 
 </body>
 
