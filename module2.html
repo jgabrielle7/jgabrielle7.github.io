@@ -29,6 +29,44 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
+  <style>
+    /* Checklist styling */
+    .checklist ul {
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+    }
+    .checklist input {
+      margin-right: 10px;
+    }
+
+    /* Badge styles */
+    .badge-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .badge-faint {
+      opacity: 0.3;
+      font-size: 1.5em;
+      padding: 10px 20px;
+      border: 2px solid #6c757d;
+      background-color: #e9ecef;
+      color: #6c757d;
+      border-radius: 10px;
+      transition: opacity 0.5s ease, background-color 0.5s ease;
+    }
+    .badge-unlocked {
+      opacity: 1;
+      background-color: #28a745;
+      color: white;
+    }
+  </style>
+
   <!-- =======================================================
   * Template Name: NiceAdmin
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -194,11 +232,32 @@
         <div class="col-lg-12">
 
           <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Progress Checklist</h5>
-              <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable. Check for <a href="https://fiduswriter.github.io/simple-datatables/demos/" target="_blank">more examples</a>.</p>
+            <div class="card-body d-flex justify-content-between">
+              <div class="checklist">
+                <h5 class="card-title">Progress Checklist</h5>
+                <ul id="checklist-items">
+                  <li>
+                    <input type="checkbox" class="check-item" id="item1">
+                    <label for="item1">Task 1: Complete Module 1</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" class="check-item" id="item2">
+                    <label for="item2">Task 2: Submit Assignment 1</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" class="check-item" id="item3">
+                    <label for="item3">Task 3: Review Module 2</label>
+                  </li>
+                </ul>
+              </div>
+              <div class="badge-container">
+                <div id="completion-badge" class="badge badge-secondary badge-faint">
+                  Badge Unlocked!
+                </div>
+              </div>
             </div>
           </div>
+          
 
         </div>
       </div>
@@ -234,6 +293,36 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const checkItems = document.querySelectorAll(".check-item");
+    const badge = document.getElementById("completion-badge");
+
+    function checkCompletion() {
+      const allChecked = Array.from(checkItems).every(item => item.checked);
+      if (allChecked) {
+        badge.classList.add("badge-unlocked");
+        triggerConfetti();
+      } else {
+        badge.classList.remove("badge-unlocked");
+      }
+    }
+
+    function triggerConfetti() {
+      confetti({
+        particleCount: 100,
+        spread: 160,
+        origin: { x: 0.5, y: 0.5 }
+      });
+    }
+
+    checkItems.forEach(item =>
+      item.addEventListener("change", checkCompletion)
+    );
+  });
+</script>
 
 </body>
 
